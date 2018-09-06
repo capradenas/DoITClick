@@ -14,14 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\js\FlujoInterno\IngresoDatosPaciente.min.js.gz" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\js\FlujoInterno\IngresoDatosPaciente.min.js.gz" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="2.8.391" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.0.2" />
@@ -35,6 +27,7 @@
     <Folder Include="wwwroot\Assets\plugins\flot-charts\examples\gauge\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -1505,7 +1498,6 @@
     <None Include="wwwroot\Assets\plugins\x-editable\README.md" />
     <None Include="wwwroot\Assets\premium\icon-sets\icons\line-icons\fonts\premium-line-icons.svg" />
     <None Include="wwwroot\Assets\premium\icon-sets\icons\solid-icons\fonts\premium-solid-icons.svg" />
-    <None Include="wwwroot\js\FlujoInterno\IngresoDatosPaciente.min.js.gz" />
   </ItemGroup>
 
   <ItemGroup>
