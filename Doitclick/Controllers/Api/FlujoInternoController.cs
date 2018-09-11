@@ -216,7 +216,7 @@ namespace Doitclick.Controllers.Api
 
         [Route("bandeja-tareas")]
         [HttpGet]
-        public async Task<IActionResult> BandejaTareas(int limit = 10, int offset = 0, string search = "")
+        public IActionResult BandejaTareas(int limit = 10, int offset = 0, string search = "")
         {
 
             var rut = User.Identity.Name;
@@ -234,10 +234,11 @@ namespace Doitclick.Controllers.Api
             {
                 bandeja = bandeja.Where(x => x.Tarea.Solicitud.NumeroTicket.Contains(search) || x.Cotizacion.Cliente.Rut.Contains(search) || x.Cotizacion.Cliente.Nombres.Contains(search));
             }
-            
+
             BootstrapTableResult<ListadoInicioContainer> salida = new BootstrapTableResult<ListadoInicioContainer>();
             salida.total = bandeja.Count();
             salida.rows = bandeja.Skip(offset).Take(limit).ToList();
+            
             return Ok(salida);
         }
     }

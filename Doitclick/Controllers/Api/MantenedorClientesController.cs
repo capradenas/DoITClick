@@ -56,7 +56,7 @@ namespace Doitclick.Controllers.Api
         {
 
             var rut = User.Identity.Name;
-            var bandeja = _context.Clientes.ToList();
+            var bandeja = await _context.Clientes.ToListAsync();
             
             BootstrapTableResult<Cliente> salida = new BootstrapTableResult<Cliente>();
             salida.total = bandeja.Count();
