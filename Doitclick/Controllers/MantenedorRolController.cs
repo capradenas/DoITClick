@@ -11,7 +11,12 @@ namespace Doitclick.Controllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class MantenedorRolController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Listado()
+        {
+            return View();
+        }
+
+        public IActionResult Formulario()
         {
             return View();
         }

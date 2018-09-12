@@ -11,6 +11,7 @@ namespace Doitclick.Models.Security
         public Organizacion Orzanizacion { get; set; }
         public Rol Padre { get; set; }
         public ICollection<Rol> Hijos { get; set; }
-        public bool Activo { get; set; }   
+        public bool Activo { get; set; }
+        public bool Comisionista { get; set; }
     }
 }

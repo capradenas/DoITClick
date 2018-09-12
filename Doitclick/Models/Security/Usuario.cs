@@ -13,6 +13,7 @@ namespace Doitclick.Models.Security
         public string TokenRecuerdaAcceso { get; set; }
         public bool Eliminado { get; set; }
         public string Nombres { get; set; }
+        public float PorcentajeComision { get; set; }
 
     }
 }

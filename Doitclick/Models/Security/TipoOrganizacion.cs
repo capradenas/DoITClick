@@ -9,10 +9,8 @@ namespace Doitclick.Models.Security
     {
         NoAplica,
         Holding,
-        Empresa,
-        Fundacion,
-        Sucursal,
-        Oficina
+        Clinica,
+        Laboratorio
     }
 }
 

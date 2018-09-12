@@ -182,22 +182,7 @@ namespace Doitclick.Controllers.Api
                 return BadRequest("Algo anda mal");
             }
         }
-
-
-        [Route("Test/Charly")]
-        [HttpGet]
-        public IActionResult PruebaCharles()
-        {
-            //TipoOrganizacion.Oficina
-
-            Organizacion org = new Organizacion
-            {
-                TipoOrganizacion = TipoOrganizacion.Oficina,
-                Nombre = "Carlos Pradenas y Asociados"
-            };
-            //var x = (TipoOrganizacion)'O';
-            return Ok(((char)TipoOrganizacion.Oficina).ToString());
-        }
+        
 
         [Route("poner-online")]
         [HttpGet]
