@@ -30,33 +30,40 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
+                            <label for="RutPaciente">Organización</label>
+                            <select name="Organizacion" class="form-control">
+                                    <option value="">Seleccione</option>
+                                    @foreach(var itm in ViewBag.OrganicacionesList)
+                                    {
+                                        <option value="@itm.Id">@itm.Nombre</option>
+                                    }
+                            </select>
+                        </div>
+                        
+                        
+                        <div class="col-sm-12 col-md-6">
                             <label for="RutPaciente">Nombre</label>
                             <div class="input-group mar-btm">
                                 <span class="input-group-addon"><i class="demo-pli-male"></i></span>
-                                <input type="text" id="RutPaciente" name="RutPaciente" class="form-control">
+                                <input type="text" id="Nombre" name="Nombre" class="form-control">
                             </div>
                         </div>
+                        
+                    </div>
 
-                        <div class="col-sm-12 col-md-4">
-                            <label for="RutPaciente">Nombres</label>
-                            <div class="input-group mar-btm">
-                                <span class="input-group-addon"><i class="demo-pli-male"></i></span>
-                                <input type="text" id="RutPaciente" name="RutPaciente" class="form-control">
-                            </div>
+                     <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="comisionist">Comisionista</label>
+                            <input type="checkbox" id="comisionist" />
                         </div>
-
-                        <div class="col-sm-12 col-md-4">
-                            <label for="RutPaciente">Apellidos</label>
-                            <div class="input-group mar-btm">
-                                <span class="input-group-addon"><i class="demo-pli-male"></i></span>
-                                <input type="text" id="RutPaciente" name="RutPaciente" class="form-control">
-                            </div>
-                        </div>
+                        
+                        
                     </div>
 
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="text-right no-print">
+                                <input type="hidden" name="Id" value="0" />
                                 <button class="btn btn-primary" id="btn-confirmar">Guardar Cambios</button>
                             </div>
                         </div>

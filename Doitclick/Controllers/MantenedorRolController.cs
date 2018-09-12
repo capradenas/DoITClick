@@ -4,13 +4,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Doitclick.Data;
 
 namespace Doitclick.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize]
     public class MantenedorRolController : Controller
     {
+
+        private readonly ApplicationDbContext _context;
+        public MantenedorRolController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+
         public IActionResult Listado()
         {
             return View();
@@ -18,6 +26,7 @@ namespace Doitclick.Controllers
 
         public IActionResult Formulario()
         {
+            ViewBag.OrganicacionesList = _context.Organizaciones.ToList();
             return View();
         }
     }
