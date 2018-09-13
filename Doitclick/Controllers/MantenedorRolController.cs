@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Doitclick.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Doitclick.Controllers
 {
@@ -21,11 +22,16 @@ namespace Doitclick.Controllers
 
         public IActionResult Listado()
         {
+            var rols = _context.Roles.ToList();
+            ViewBag.rolesList = rols;
             return View();
         }
 
-        public IActionResult Formulario()
+        public IActionResult Formulario(string id = "")
         {
+            var rol = _context.Roles.Find(id);
+            ViewBag.rol = rol;
+            ViewBag.editando = !String.IsNullOrEmpty(id);
             ViewBag.OrganicacionesList = _context.Organizaciones.ToList();
             return View();
         }
