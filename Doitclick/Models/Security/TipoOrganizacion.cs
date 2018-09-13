@@ -7,11 +7,12 @@ namespace Doitclick.Models.Security
 {
     public enum TipoOrganizacion
     {
-        Holding='H',
-        Empresa='E',
-        Fundacion='F',
-        Sucursal='S',
-        Oficina='O'
+        NoAplica,
+        Holding,
+        Empresa,
+        Fundacion,
+        Sucursal,
+        Oficina
     }
 }
 

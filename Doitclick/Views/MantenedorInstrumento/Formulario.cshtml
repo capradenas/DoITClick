@@ -1,4 +1,4 @@
-﻿
+
 @{
     ViewData["Title"] = "Organización";
 }
@@ -33,68 +33,26 @@
                         <h1>@ViewBag.tipoSelected</h1>
                          <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label">Nombre</label>
-                                <input type="text" value="@(ViewBag.Id > 0 ? ViewBag.Org.Nombre : "")" name="Nombre" class="form-control">
+                                <label class="control-label">Instrumento</label>
+                                <input type="text" value="@(ViewBag.Id > 0 ? ViewBag.Org.Nombre : "")" name="NombreInstrumento" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">Tipo Organización</label>
-                                <select class="form-control" name="TipoOrganizacion">
-                                    @foreach (var type in ViewBag.tiposList)
-                                    {
-
-                                        if (ViewBag.Id > 0 && ViewBag.Org.TipoOrganizacion == type)
-                                        {
-                                            <option value="@type" selected>@type</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@type">@type</option>
-                                        }
-
-                                    }
-                                </select>
-                                
+                          <div class="form-group">
+                                <label class="control-label">Código</label>
+                                <input type="text" value="@(ViewBag.Id > 0 ? ViewBag.Org.Codigo : "")" name="CodigoInstrumento" class="form-control">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="panel-footer text-right">
                     <input type="hidden" name="Id" value="@ViewBag.Id" />
-                    <a href="/MantenedorOrganizacion/Listado" class="btn btn-primary" >Volver</a>
+                    <a href="/MantenedorInstrumento/Listado" class="btn btn-primary" >Volver</a>
                     <button class="btn btn-success" type="submit">Guardar</button>
                 </div>
             </div>
         </div>
     </div>
-
-    <div id="demo-lg-modal" class="modal fade" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><i class="pci-cross pci-circle"></i></button>
-                    <h4 class="modal-title" id="myLargeModalLabel">Orden de Trabajo</h4>
-                </div>
-                <div class="modal-body">
-                    <div id="demo-gallery" style="display:none;">
-                        <a href="#">
-                            <img alt="The winding road"
-                                 src="~/Assets/img/gallery/thumbs/tile1.jpg"
-                                 data-image="~/Assets/img/gallery/big/tile1.jpg"
-                                 data-description="The winding road description"
-                                 style="display:none">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
 </form>
 
 @section Scripts{
@@ -113,7 +71,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "/api/mantenedores/organizacion/guardar",
+                    url: "/api/mantenedores/instrumento/guardar",
                     data: JSON.stringify(model),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json"
@@ -124,6 +82,8 @@
                     console.log(errMsg);
                 }).always(function () {
                     console.log("HOLAA!")
+                      alert("Instrumento Guardado");
+                      $('#frm-generico')[0].reset();
                 });
 
             });

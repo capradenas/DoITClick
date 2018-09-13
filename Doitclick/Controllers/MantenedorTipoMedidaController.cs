@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,18 +10,18 @@ using Doitclick.Data;
 
 namespace Doitclick.Controllers
 {
-    public class MantenedorOrganizacionController : Controller
+    public class MantenedorTipoMedidaController : Controller
     {
 
         private readonly ApplicationDbContext _context;
-        public MantenedorOrganizacionController(ApplicationDbContext context)
+        public MantenedorTipoMedidaController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         public IActionResult Listado()
         {
-            ViewBag.orgaList = _context.Organizaciones.ToList();
+            ViewBag.unidadlist = _context.TiposUnidadMedidas.ToList();
             return View();
         }
 
@@ -29,10 +29,8 @@ namespace Doitclick.Controllers
         {
             ViewBag.Id = id;
 
-            var Orga = _context.Organizaciones.FirstOrDefault(x => x.Id == id);
-            ViewBag.Org = Orga;
-            
-            ViewBag.tiposList = (TipoOrganizacion[])Enum.GetValues(typeof(TipoOrganizacion));
+            var Unidad = _context.TiposUnidadMedidas.FirstOrDefault(x => x.Id == id);
+            ViewBag.tipuni = Unidad;
             return View();
         }
 

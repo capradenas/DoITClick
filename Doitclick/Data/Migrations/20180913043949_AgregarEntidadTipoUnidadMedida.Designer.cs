@@ -3,14 +3,16 @@ using System;
 using Doitclick.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Doitclick.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180913043949_AgregarEntidadTipoUnidadMedida")]
+    partial class AgregarEntidadTipoUnidadMedida
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -177,12 +179,9 @@ namespace Doitclick.Data.Migrations
 
                     b.Property<int>("StockAlerta");
 
-                    b.Property<int?>("UnidadMedidaId")
-                        .IsRequired();
+                    b.Property<int>("UnidadMedida");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UnidadMedidaId");
 
                     b.ToTable("MaterialesMensuales");
                 });
@@ -817,14 +816,6 @@ namespace Doitclick.Data.Migrations
                     b.HasOne("Doitclick.Models.Application.Servicio", "Servicio")
                         .WithMany("ServiciosCotizar")
                         .HasForeignKey("ServicioId");
-                });
-
-            modelBuilder.Entity("Doitclick.Models.Application.MaterialMensual", b =>
-                {
-                    b.HasOne("Doitclick.Models.Application.TipoUnidadMedida", "UnidadMedida")
-                        .WithMany("MaterialMensual")
-                        .HasForeignKey("UnidadMedidaId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Doitclick.Models.Application.MaterialPresupuestado", b =>

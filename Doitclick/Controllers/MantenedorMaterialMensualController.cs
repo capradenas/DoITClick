@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,32 +7,32 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Doitclick.Models.Security;
 using Doitclick.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Doitclick.Controllers
 {
-    public class MantenedorOrganizacionController : Controller
+    public class MantenedorMaterialMensualController : Controller
     {
 
         private readonly ApplicationDbContext _context;
-        public MantenedorOrganizacionController(ApplicationDbContext context)
+        public MantenedorMaterialMensualController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         public IActionResult Listado()
         {
-            ViewBag.orgaList = _context.Organizaciones.ToList();
+           ViewBag.matmens = _context.MaterialesMensuales.Include(x=>x.UnidadMedida).ToList();
             return View();
         }
 
         public IActionResult Formulario(int id = 0)
         {
             ViewBag.Id = id;
+            ViewBag.unidadmed =_context.TiposUnidadMedidas.ToList();
 
-            var Orga = _context.Organizaciones.FirstOrDefault(x => x.Id == id);
-            ViewBag.Org = Orga;
-            
-            ViewBag.tiposList = (TipoOrganizacion[])Enum.GetValues(typeof(TipoOrganizacion));
+            var materialmensual = _context.MaterialesMensuales.Include(x=>x.UnidadMedida).FirstOrDefault(x => x.Id == id);
+            ViewBag.mensual = materialmensual;
             return View();
         }
 
