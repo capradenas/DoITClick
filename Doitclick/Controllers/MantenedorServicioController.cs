@@ -10,6 +10,7 @@ namespace Doitclick.Controllers
     public class MantenedorServicioController : Controller
     {
         private readonly ApplicationDbContext _context;
+      
         public MantenedorServicioController(ApplicationDbContext context)
         {
             _context = context;
@@ -20,8 +21,9 @@ namespace Doitclick.Controllers
             return View();
         }
 
-        public IActionResult Index()
+        public IActionResult Listado()
         {
+            ViewBag.servList = _context.Servicios.ToList();//.Organizaciones.ToList();
             return View();
         }
     }

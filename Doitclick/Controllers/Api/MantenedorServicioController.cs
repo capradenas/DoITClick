@@ -57,9 +57,12 @@ namespace Doitclick.Controllers.Api
         }
 
        [HttpGet]
-       public IActionResult ObtenerServiciosAll(){
+       public IActionResult ObtenerServiciosAll()
+       {
            return Ok(_context.Servicios.ToList());
        }
+      
+       
         
 
     }

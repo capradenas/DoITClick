@@ -1,3 +1,6 @@
 ﻿dotnet ef migrations add CREAR_ESQUEMA_TABLAS -o Data/Migrations
 
 dotnet ef database update
+
+
+dotnet ef migrations remove

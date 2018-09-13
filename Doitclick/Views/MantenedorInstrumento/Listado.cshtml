@@ -1,6 +1,6 @@
 
 @{
-    ViewData["Title"] = "Listado de Clientes";
+    ViewData["Title"] = "Listado Instrumento";
 }
 
 <form id="frm-generico">
@@ -31,30 +31,24 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-12 col-md-12">
-                            <a href="/MantenedorCliente/Formulario" class="btn btn-primary">Nuevo</a>
+                            <a href="/MantenedorInstrumento/Formulario" class="btn btn-primary">Nuevo</a>
                             <table id="table" class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Rut</th>
-                                        <th>Nombre</th>
-                                        <th>Tipo</th>
-                                        <th>Tipo Juridico</th>
-                                        <th>Prevision</th>
+                                        <th>Instrumento</th>
+                                        <th>Codigo</th>
                                         <th>Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var itm in ViewBag.clienList)
+                                    @foreach (var itm in ViewBag.instList)
                                     {
                                         <tr>
-                                            <td>@itm.Rut</td>
-                                            <td>@itm.Nombres</td>
-                                            <td>@itm.TipoCliente</td>
-                                            <td>@itm.EsPersonalidadJuridica</td>
-                                            <td>@itm.PrevisionSalud.Nombre</td>
+                                            <td>@itm.Nombre</td>
+                                            <td>@itm.Codigo</td>
                                             <td>
                                                 <a href="#" data-id="@itm.Id" class="elimination btn btn-danger btn-sm">Eliminar</a>
-                                                <a href="/MantenedorTipoMedida/Formulario/@itm.Id" class="edicion btn btn-primary btn-sm">Editar</a>
+                                                <a href="/MantenedorInstrumento/Formulario/@itm.Id" class="edicion btn btn-primary btn-sm">Editar</a>
                                             </td>
                                         </tr>
 
@@ -114,9 +108,9 @@
                 
                 $.ajax({
                     type: "GET",
-                    url:`/api/mantenedores/cliente/eliminar/${id}`
+                    url:`/api/mantenedores/instrumento/eliminar/${id}`
                 }).done(function (data) {
-                    alert("Eliminado ");
+                    alert("Eliminado exitoso");
                 }).fail(function (errMsg) {
                     console.log(errMsg);
                 }).always(function () {

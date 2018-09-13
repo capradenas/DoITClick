@@ -38,6 +38,10 @@ namespace Doitclick.Data
         public DbSet<MovimientoCuentaCorriente> MovimientosCuentasCorrientes { get; set; }
         public DbSet<MovimientoMaterialDisponoble> MovimientosMaterialesDisponibles { get; set; }
         public DbSet<Servicio> Servicios { get; set; }
+        public DbSet<Instrumento> Instrumentos { get; set; }
+        public DbSet<MaterialMensual> MaterialesMensuales {get;set;}
+        public DbSet<MovimientoMaterialMensual> MovimientosMaterialesMensuales{get;set;}
+        public DbSet<TipoUnidadMedida> TiposUnidadMedidas{get;set;}
        
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -83,6 +87,13 @@ namespace Doitclick.Data
                     c => (TipoOrganizacion)Enum.Parse(typeof(TipoOrganizacion), c)
                 )
                 .IsRequired();
+                  builder.Entity<MaterialDisponible>()
+                .Property(o => o.UnidadMedida)
+                .HasConversion(
+                    c => c.ToString(),
+                    c => (UnidadMedida)Enum.Parse(typeof(UnidadMedida), c)
+                )
+                .IsRequired();
 
             /*WF*/
             builder.Entity<Proceso>()
@@ -113,7 +124,10 @@ namespace Doitclick.Data
                     v => (TipoUsuarioAsignado)Enum.Parse(typeof(TipoUsuarioAsignado), v))
                 ).IsRequired();
 
-            
+            builder.Entity<TipoUnidadMedida>()
+            .HasMany(c => c.MaterialMensual)
+            .WithOne(c => c.UnidadMedida)
+            .IsRequired();
 
             builder.Entity<Etapa>()
                 .Property(d => d.TipoEtapa)
@@ -158,6 +172,8 @@ namespace Doitclick.Data
                 )
                 .IsRequired();
 
+
+
             builder.Entity<Etapa>()
                 .Property(s => s.ValorUsuarioAsignado)
                 .IsRequired();
@@ -196,6 +212,16 @@ namespace Doitclick.Data
                 .HasMany(c => c.Cotizaciones)
                 .WithOne(m => m.Cliente)
                 .IsRequired(false);
+
+
+            builder.Entity<Cliente>()
+                .Property(d=>d.TipoCliente)
+                .HasConversion(
+                new ValueConverter<TipoCliente, string>(
+                    v => v.ToString(),
+                    v => (TipoCliente)Enum.Parse(typeof(TipoCliente), v))
+                )
+                .IsRequired();
 
             builder.Entity<Contacto>()
                 .HasMany(c => c.MetaDatosContacto)
