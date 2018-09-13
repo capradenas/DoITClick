@@ -63,10 +63,10 @@ namespace Doitclick.Controllers.Api
         public async Task<IActionResult> GuardarRol([FromBody] FormRol entrada)
         {
             var orga = _context.Organizaciones.Where(org => org.Id == entrada.Organizacion).FirstOrDefault();
-            Rol elRol = null;
-            if(entrada.Id > 0)
+            Rol elRol =  _context.Roles.Find(entrada.Id);
+            if(elRol != null)
             {
-                elRol = _context.Roles.Find(entrada.Id);
+
                 elRol.Name = entrada.Nombre;
                 elRol.Orzanizacion = orga;
                 elRol.Comisionista = entrada.Comisionista;
