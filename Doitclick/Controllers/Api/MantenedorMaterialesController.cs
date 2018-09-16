@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Doitclick.Data;
 using Doitclick.Models.Application;
 using Doitclick.Services.Workflow;
+using Microsoft.EntityFrameworkCore;
 
 namespace Doitclick.Controllers.Api
 {
@@ -30,10 +31,13 @@ namespace Doitclick.Controllers.Api
             MaterialDisponible _material = new MaterialDisponible
             {
                 Nombre = material.NombreMaterial,
-                UnidadMedida = Enum.Parse<UnidadMedida>(material.sslUnidadMedida.ToString()),
+                UnidadMedida = _context.TiposUnidadMedidas.Find(material.sslUnidadMedida),
                 PrecioUnidad = material.PrecioMaterial,
-                StockAlerta=material.StockMaterial
+                StockAlerta=material.StockMaterial,
+                Codigo = material.Codigo,
+                Marca = await _context.Marcas.FindAsync(material.Marca)
             };
+            
             _context.MaterialesDiponibles.Add(_material);
             var respuesta = await _context.SaveChangesAsync();
 
@@ -44,7 +48,7 @@ namespace Doitclick.Controllers.Api
         [HttpGet]
         public ActionResult<ICollection<MaterialDisponible>> ListarMateriales()
         {
-            return _context.MaterialesDiponibles.ToList();
+            return _context.MaterialesDiponibles.Include(d => d.UnidadMedida).Include(m => m.Marca).ToList();
         }
         
 

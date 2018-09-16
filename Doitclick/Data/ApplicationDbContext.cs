@@ -42,6 +42,7 @@ namespace Doitclick.Data
         public DbSet<MaterialMensual> MaterialesMensuales {get;set;}
         public DbSet<MovimientoMaterialMensual> MovimientosMaterialesMensuales{get;set;}
         public DbSet<TipoUnidadMedida> TiposUnidadMedidas{get;set;}
+        public DbSet<Marca> Marcas { get; set; }
        
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -87,13 +88,12 @@ namespace Doitclick.Data
                     c => (TipoOrganizacion)Enum.Parse(typeof(TipoOrganizacion), c)
                 )
                 .IsRequired();
-                  builder.Entity<MaterialDisponible>()
-                .Property(o => o.UnidadMedida)
-                .HasConversion(
-                    c => c.ToString(),
-                    c => (UnidadMedida)Enum.Parse(typeof(UnidadMedida), c)
-                )
+                  
+            builder.Entity<MaterialDisponible>()
+                .HasOne(m => m.UnidadMedida)
+                .WithMany(u => u.MAterialDisponible)
                 .IsRequired();
+                
 
             /*WF*/
             builder.Entity<Proceso>()

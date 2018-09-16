@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Doitclick.Models.Security;
 using Doitclick.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Doitclick.Controllers
 {
@@ -28,9 +29,10 @@ namespace Doitclick.Controllers
         public IActionResult Formulario(int id = 0)
         {
             ViewBag.Id = id;
-
-            var Inst = _context.Instrumentos.FirstOrDefault(x => x.Id == id);
+            var Inst = _context.Instrumentos.Include(x => x.Marca).FirstOrDefault(x => x.Id == id);
             ViewBag.instru = Inst;
+            ViewBag.marcaListado = _context.Marcas.ToList();
+            ViewBag.editando = (id > 0);
             return View();
         }
 

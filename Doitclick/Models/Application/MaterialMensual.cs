@@ -13,5 +13,7 @@ namespace Doitclick.Models.Application
         public TipoUnidadMedida UnidadMedida { get; set; }       
         public int StockAlerta { get;set; }
         public int Cantidad {get;set;}
+        public string Codigo { get; set; }
+        public Marca Marca { get; set; }
     }
 }

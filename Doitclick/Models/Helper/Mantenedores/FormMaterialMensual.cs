@@ -13,6 +13,8 @@ namespace Doitclick.Models.Helper.Mantenedores
         public int sslUnidadMedida { get; set; }
         public int Stock { get; set; }
         public int Cantidad { get; set; }
+        public int Marca { get; set; }
+        public string Codigo { get; set; }
         
         
     }

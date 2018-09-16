@@ -39,8 +39,22 @@
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-                                <label class="control-label">Descripción</label>
-                                <input type="text" value="@(ViewBag.Id > 0 ? ViewBag.mensual.Descripcion : "")" name="Descripcion" class="form-control">
+                                <label class="control-label">Marca</label>
+                                <select  name="Marca"  class="form-control">
+                                    <option value="">Seleccione</option>
+                                    @foreach(var itm in ViewBag.marcaListado)
+                                    {
+                                        if(ViewBag.editando && ViewBag.mensual.Marca.Id == itm.Id)
+                                        {
+                                            <option value="@itm.Id" selected>@itm.Nombre</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@itm.Id">@itm.Nombre</option>
+                                        }
+                                        
+                                    }
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -50,9 +64,18 @@
                             <div class="form-group">
                                 <label class="control-label">Unidad</label>
                                 <select class="form-control" id="sslUnidadMedida" name="sslUnidadMedida">
+                                    <option value="">Seleccione</option>
                                     @foreach(var itm in ViewBag.unidadmed)
                                     {
-                                        <option value="@itm.Id">@itm.Nombre</option>
+                                        if(ViewBag.editando && ViewBag.mensual.UnidadMedida.Id == itm.Id)
+                                        {
+                                            <option value="@itm.Id">@itm.Nombre</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@itm.Id">@itm.Nombre</option>
+                                        }
+                                        
                                     }
                                 </select>
                             </div>
@@ -67,6 +90,20 @@
                           <div class="form-group">
                                 <label class="control-label">Stock</label>
                                 <input type="text" value="@(ViewBag.Id > 0 ? ViewBag.mensual.StockAlerta : "")" name="Stock" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                                <label class="control-label">Codigo</label>
+                                <input type="text" value="@(ViewBag.Id > 0 ? ViewBag.mensual.Codigo : "")" name="Codigo" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label">Descripción</label>
+                                <textarea name="Descripcion" class="form-control">@(ViewBag.Id > 0 ? ViewBag.mensual.Descripcion : "")</textarea>
                             </div>
                         </div>
                     </div>

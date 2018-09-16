@@ -11,5 +11,7 @@ namespace Doitclick.Models.Helper
         public int sslUnidadMedida { get; set; }
         public int PrecioMaterial { get; set; }
         public int StockMaterial { get; set; }
+        public string Codigo { get; set; }
+        public int Marca { get; set; }
     }
 }

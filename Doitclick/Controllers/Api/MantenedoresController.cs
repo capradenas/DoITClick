@@ -251,6 +251,8 @@ namespace Doitclick.Controllers.Api
                 elmaterialmensual.UnidadMedida=_context.TiposUnidadMedidas.Find(entrada.sslUnidadMedida);
                 elmaterialmensual.Cantidad=entrada.Cantidad;
                 elmaterialmensual.StockAlerta=entrada.Stock;
+                elmaterialmensual.Codigo = entrada.Codigo;
+                elmaterialmensual.Marca = _context.Marcas.Find(entrada.Marca);
             }
             else
             {
@@ -260,6 +262,8 @@ namespace Doitclick.Controllers.Api
                 elmaterialmensual.UnidadMedida=_context.TiposUnidadMedidas.Find(entrada.sslUnidadMedida);
                 elmaterialmensual.Cantidad=entrada.Cantidad;
                 elmaterialmensual.StockAlerta=entrada.Stock;
+                elmaterialmensual.Codigo = entrada.Codigo;
+                elmaterialmensual.Marca = _context.Marcas.Find(entrada.Marca);
 
                 _context.MaterialesMensuales.Add(elmaterialmensual);
             }

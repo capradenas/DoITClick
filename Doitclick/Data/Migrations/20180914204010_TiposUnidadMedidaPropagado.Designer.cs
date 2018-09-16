@@ -3,14 +3,16 @@ using System;
 using Doitclick.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Doitclick.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180914204010_TiposUnidadMedidaPropagado")]
+    partial class TiposUnidadMedidaPropagado
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,17 +118,9 @@ namespace Doitclick.Data.Migrations
 
                     b.Property<string>("Codigo");
 
-                    b.Property<string>("Descripcion");
-
-                    b.Property<string>("Estado");
-
-                    b.Property<int?>("MarcaId");
-
                     b.Property<string>("Nombre");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MarcaId");
 
                     b.ToTable("Instrumentos");
                 });
@@ -153,26 +147,10 @@ namespace Doitclick.Data.Migrations
                     b.ToTable("ItemsCorizar");
                 });
 
-            modelBuilder.Entity("Doitclick.Models.Application.Marca", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Nombre");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Marcas");
-                });
-
             modelBuilder.Entity("Doitclick.Models.Application.MaterialDisponible", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Codigo");
-
-                    b.Property<int?>("MarcaId");
 
                     b.Property<string>("Nombre");
 
@@ -184,8 +162,6 @@ namespace Doitclick.Data.Migrations
                         .IsRequired();
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MarcaId");
 
                     b.HasIndex("UnidadMedidaId");
 
@@ -199,11 +175,7 @@ namespace Doitclick.Data.Migrations
 
                     b.Property<int>("Cantidad");
 
-                    b.Property<string>("Codigo");
-
                     b.Property<string>("Descripcion");
-
-                    b.Property<int?>("MarcaId");
 
                     b.Property<string>("Nombre");
 
@@ -213,8 +185,6 @@ namespace Doitclick.Data.Migrations
                         .IsRequired();
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MarcaId");
 
                     b.HasIndex("UnidadMedidaId");
 
@@ -846,13 +816,6 @@ namespace Doitclick.Data.Migrations
                         .HasForeignKey("ClienteId");
                 });
 
-            modelBuilder.Entity("Doitclick.Models.Application.Instrumento", b =>
-                {
-                    b.HasOne("Doitclick.Models.Application.Marca", "Marca")
-                        .WithMany("Instrumento")
-                        .HasForeignKey("MarcaId");
-                });
-
             modelBuilder.Entity("Doitclick.Models.Application.ItemCotizar", b =>
                 {
                     b.HasOne("Doitclick.Models.Application.Cotizacion", "Cotizacion")
@@ -866,10 +829,6 @@ namespace Doitclick.Data.Migrations
 
             modelBuilder.Entity("Doitclick.Models.Application.MaterialDisponible", b =>
                 {
-                    b.HasOne("Doitclick.Models.Application.Marca", "Marca")
-                        .WithMany("MaterialDiponible")
-                        .HasForeignKey("MarcaId");
-
                     b.HasOne("Doitclick.Models.Application.TipoUnidadMedida", "UnidadMedida")
                         .WithMany("MAterialDisponible")
                         .HasForeignKey("UnidadMedidaId")
@@ -878,10 +837,6 @@ namespace Doitclick.Data.Migrations
 
             modelBuilder.Entity("Doitclick.Models.Application.MaterialMensual", b =>
                 {
-                    b.HasOne("Doitclick.Models.Application.Marca", "Marca")
-                        .WithMany("MaterialMensual")
-                        .HasForeignKey("MarcaId");
-
                     b.HasOne("Doitclick.Models.Application.TipoUnidadMedida", "UnidadMedida")
                         .WithMany("MaterialMensual")
                         .HasForeignKey("UnidadMedidaId")

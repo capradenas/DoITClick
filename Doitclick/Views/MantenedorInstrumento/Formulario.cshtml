@@ -1,6 +1,6 @@
 
 @{
-    ViewData["Title"] = "Organización";
+    ViewData["Title"] = "Instrumento y/o Máquina";
 }
 
 <form id="frm-generico">
@@ -30,17 +30,51 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <h1>@ViewBag.tipoSelected</h1>
                          <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Instrumento</label>
-                                <input type="text" value="@(ViewBag.Id > 0 ? ViewBag.Org.Nombre : "")" name="NombreInstrumento" class="form-control">
+                                <input type="text" value="@(ViewBag.Id > 0 ? ViewBag.instru.Nombre : "")" name="NombreInstrumento" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
                                 <label class="control-label">Código</label>
-                                <input type="text" value="@(ViewBag.Id > 0 ? ViewBag.Org.Codigo : "")" name="CodigoInstrumento" class="form-control">
+                                <input type="text" value="@(ViewBag.Id > 0 ? ViewBag.instru.Codigo : "")" name="CodigoInstrumento" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Estado</label>
+                                <select class="form-control">
+                                    <option value="">Seleccione</option>   
+                                    <option value="N" @(ViewBag.editando && ViewBag.instru.Estado == "N" ? "selected" : "")>Nuevo</option>  
+                                    <option value="R" @(ViewBag.editando && ViewBag.instru.Estado == "R" ? "selected" : "")>Regular</option>  
+                                    <option value="M" @(ViewBag.editando && ViewBag.instru.Estado == "M" ? "selected" : "")>Malo</option>  
+                                    <option value="B" @(ViewBag.editando && ViewBag.instru.Estado == "B" ? "selected" : "")>De baja</option>   
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                                <label class="control-label">Marca</label>
+                                <select class="form-control" id="slMarca" name="Marca">
+                                    <option value="">Selecione</option>
+                                    @foreach(var itm in ViewBag.marcaListado)
+                                    {
+                                        if(ViewBag.editando && ViewBag.instru.Marca.Id == itm.Id)
+                                        {
+                                            <option value="@itm.Id" selected>@itm.Nombre</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@itm.Id">@itm.Nombre</option>
+                                        }
+                                        
+                                    }
+                                </select>
                             </div>
                         </div>
                     </div>

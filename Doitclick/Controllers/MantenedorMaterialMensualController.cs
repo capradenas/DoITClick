@@ -31,8 +31,10 @@ namespace Doitclick.Controllers
             ViewBag.Id = id;
             ViewBag.unidadmed =_context.TiposUnidadMedidas.ToList();
 
-            var materialmensual = _context.MaterialesMensuales.Include(x=>x.UnidadMedida).FirstOrDefault(x => x.Id == id);
+            var materialmensual = _context.MaterialesMensuales.Include(x=>x.UnidadMedida).Include(x => x.Marca).FirstOrDefault(x => x.Id == id);
             ViewBag.mensual = materialmensual;
+            ViewBag.marcaListado = _context.Marcas.ToList();
+            ViewBag.editando = (id > 0);
             return View();
         }
 
