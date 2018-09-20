@@ -192,17 +192,24 @@ namespace Doitclick.Controllers.Api
                 elInstrumento = _context.Instrumentos.Find(entrada.Id);
                 elInstrumento.Codigo = entrada.CodigoInstrumento;
                 elInstrumento.Nombre = entrada.NombreInstrumento;
+                elInstrumento.Marca = _context.Marcas.Find(entrada.Marca);
+                elInstrumento.Estado = entrada.Estado;
+                elInstrumento.Descripcion = entrada.Descripcion;
             }
             else
             {
                 elInstrumento = new Instrumento();
                 elInstrumento.Nombre = entrada.NombreInstrumento;
                 elInstrumento.Codigo = entrada.CodigoInstrumento;
+                elInstrumento.Marca = _context.Marcas.Find(entrada.Marca);
+                elInstrumento.Estado = entrada.Estado;
+                elInstrumento.Descripcion = entrada.Descripcion;
+
                 _context.Instrumentos.Add(elInstrumento);
             }
             _context.SaveChanges();
 
-            return Ok("Datos guardados exitosamnte");
+            return Ok();
         }
         
         [Route("instrumento/eliminar/{id}")]

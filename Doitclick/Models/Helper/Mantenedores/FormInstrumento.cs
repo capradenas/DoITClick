@@ -10,5 +10,8 @@ namespace Doitclick.Models.Helper.Mantenedores
         public int Id { get; set; }
         public string NombreInstrumento { get; set; }
         public string CodigoInstrumento { get; set; }
+        public int Marca { get; set; }
+        public string Estado { get; set; }
+        public string Descripcion { get; set; }
     }
 }

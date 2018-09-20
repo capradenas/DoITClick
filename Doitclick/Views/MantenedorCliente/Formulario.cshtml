@@ -29,29 +29,15 @@
                     </h3>
                 </div>
                 <div class="panel-body">
+
                     <div class="row">
-                       <div class="col-md-2">
-                            <div class="form-group">
-                                <label class="control-label">Rut</label>
-                               <input type="text" value="@(ViewBag.Id > 0 ? ViewBag.cli.Rut : "")"id="RutCliente" name="Rutcliente" class="form-control">
-                            </div>
-                        </div>
-                      <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">Nombre</label>
-                               <input type="text" value="@(ViewBag.Id > 0 ? ViewBag.cli.Nombres : "")"id="NombreCliente" name="NombreCliente" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                       <div class="col-md-2">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Tipo Cliente</label>
                                 <select class="form-control" name="tipocliente">
                                     @foreach (var type in ViewBag.tiposList)
                                     {
-
-                                        if (ViewBag.Id > 0 && ViewBag.Cli.TipoCliente == type)
+                                        @if (ViewBag.Id > 0 && ViewBag.Cli.TipoCliente == type)
                                         {
                                             <option value="@type" selected>@type</option>
                                         }
@@ -59,13 +45,28 @@
                                         {
                                             <option value="@type">@type</option>
                                         }
-
                                     }
                                 </select>
-                                </select>
-
                             </div>
                         </div>
+                    </div>
+
+                    <div class="row">
+                       <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Rut</label>
+                               <input type="text" value="@(ViewBag.Id > 0 ? ViewBag.cli.Rut : "")" id="RutCliente" name="Rutcliente" class="form-control">
+                            </div>
+                        </div>
+                      <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Nombre</label>
+                               <input type="text" value="@(ViewBag.Id > 0 ? ViewBag.cli.Nombres : "")" id="NombreCliente" name="NombreCliente" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                      
                       <div class="col-md-2">
                             <div class="form-group">
                                 <label class="control-label">¿Es Juridica?</label>
@@ -84,48 +85,22 @@
                                     @foreach (var pre in ViewBag.PrevisionesSalud)
                                     {
                                          <option value="@pre.Id">@pre.Nombre</option>
-
                                     }
                                 </select>
 
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="panel-footer text-right">
-                    <input type="hidden" name="Id" value="@ViewBag.Id" />
-                    <a href="/MantenedorCliente/Listado" class="btn btn-primary" >Volver</a>
-                    <button class="btn btn-success" type="submit">Guardar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div id="demo-lg-modal" class="modal fade" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><i class="pci-cross pci-circle"></i></button>
-                    <h4 class="modal-title" id="myLargeModalLabel">Orden de Trabajo</h4>
-                </div>
-                <div class="modal-body">
-                    <div id="demo-gallery" style="display:none;">
-                        <a href="#">
-                            <img alt="The winding road"
-                                 src="~/Assets/img/gallery/thumbs/tile1.jpg"
-                                 data-image="~/Assets/img/gallery/big/tile1.jpg"
-                                 data-description="The winding road description"
-                                 style="display:none">
-                        </a>
+                    <div class="panel-footer text-right">
+                        <input type="hidden" name="Id" value="@ViewBag.Id" />
+                        <a href="/MantenedorCliente/Listado" class="btn btn-primary" >Volver</a>
+                        <button class="btn btn-success" type="submit">Guardar</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
 
 </form>
 
@@ -151,7 +126,14 @@
                     dataType: "json"
                 }).done(function (data) {
                     console.log(data);
-                     alert("guardado exitoso");
+                    $.niftyNoty({
+                        type: "success",
+                        container : "floating",
+                        title : "Suceso Exitoso",
+                        message : "Los datos del Cliente se han guardado correctamente",
+                        closeBtn : false,
+                        timer : 5000
+                    });
                 }).fail(function (errMsg) {
                     console.log(errMsg);
                 }).always(function () {

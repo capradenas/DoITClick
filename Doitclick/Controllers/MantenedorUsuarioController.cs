@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Doitclick.Data;
 using Microsoft.AspNetCore.Identity;
 using Doitclick.Models.Security;
+using Microsoft.EntityFrameworkCore;
 
 namespace Doitclick.Controllers
 {
@@ -42,7 +43,7 @@ namespace Doitclick.Controllers
             ViewBag.editando = !String.IsNullOrEmpty(id);
             //ViewBag.rolUsuario = await _userManager.GetRolesAsync(user);
             ViewBag.usuario = user;
-            ViewBag.rolesList = _context.Roles.ToList();
+            ViewBag.rolesList = _context.Roles.Include(r => r.Orzanizacion).ToList();
             return View();
         }
     }

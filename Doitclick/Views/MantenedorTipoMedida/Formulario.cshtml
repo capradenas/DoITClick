@@ -42,7 +42,7 @@
                 <div class="panel-footer text-right">
                     <input type="hidden" name="Id" value="@ViewBag.Id" />
                     <a href="/MantenedorTipoMedida/Listado" class="btn btn-primary" >Volver</a>
-                    <button class="btn btn-success" type="submit">Guardar</button>
+                    <button class="btn btn-success submit-generico" type="submit">Guardar</button>
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
             $('#frm-generico').on('submit', function (e) {
                 e.preventDefault();
                 var model = $(this).serializeFormJSON();
-                console.log(model)
+                $(".submit-generico").html("Cargando...");
 
                 $.ajax({
                     type: "POST",
@@ -70,14 +70,26 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json"
                 }).done(function (data) {
-                    console.log(data);
-                    alert("guardado exitoso");
-                }).fail(function (errMsg) {
-                    console.log(errMsg);
-                }).always(function () {
-                    console.log("HOLAA!")
-                    alert("Unidad Guardada");
+                    $.niftyNoty({
+                        type: "success",
+                        container : "floating",
+                        title : "Suceso Exitoso",
+                        message : "Los datos de la Unidad de Medida se han guardado correctamente",
+                        closeBtn : false,
+                        timer : 5000
+                    });
                     $('#frm-generico')[0].reset();
+                }).fail(function (errMsg) {
+                    $.niftyNoty({
+                        type: "error",
+                        container : "floating",
+                        title : "Suceso Inesperado",
+                        message : "Los datos NO se han guardado!",
+                        closeBtn : false,
+                        timer : 5000
+                    });
+                }).always(function () {
+                    $(".submit-generico").html("Guardar");
                 });
 
             });

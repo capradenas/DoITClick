@@ -9,6 +9,7 @@ namespace Doitclick.Models.Application
     {
         Paciente,
         Doctor,
-        Clinica
+        Clinica,
+        Universidad
     }
 }

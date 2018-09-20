@@ -22,7 +22,7 @@ namespace Doitclick.Controllers
 
         public IActionResult Listado()
         {
-            ViewBag.instList = _context.Instrumentos.ToList();
+            ViewBag.instList = _context.Instrumentos.Include(f => f.Marca).ToList();
             return View();
         }
 

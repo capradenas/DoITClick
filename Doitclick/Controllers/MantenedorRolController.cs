@@ -22,7 +22,7 @@ namespace Doitclick.Controllers
 
         public IActionResult Listado()
         {
-            var rols = _context.Roles.ToList();
+            var rols = _context.Roles.Include(s => s.Orzanizacion).ToList();
             ViewBag.rolesList = rols;
             return View();
         }

@@ -1,4 +1,3 @@
-
 @{
     ViewData["Title"] = "Listado Instrumento y/o Máquina";
 }
@@ -35,17 +34,22 @@
                             <table id="table" class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Instrumento</th>
                                         <th>Codigo</th>
+                                        <th>Nombre</th>
+                                        <th>Marca</th>
+                                        <th>Estado</th>
                                         <th>Acción</th>
                                     </tr>
                                 </thead>
+                                @using Doitclick.Models.Helper;
                                 <tbody>
                                     @foreach (var itm in ViewBag.instList)
                                     {
                                         <tr>
-                                            <td>@itm.Nombre</td>
                                             <td>@itm.Codigo</td>
+                                            <td>@itm.Nombre</td>
+                                            <td>@itm.Marca.Nombre</td>
+                                            <td>@ViewHelper.EstadosInstrumentos(itm.Estado)</td>
                                             <td>
                                                 <a href="#" data-id="@itm.Id" class="elimination btn btn-danger btn-sm">Eliminar</a>
                                                 <a href="/MantenedorInstrumento/Formulario/@itm.Id" class="edicion btn btn-primary btn-sm">Editar</a>

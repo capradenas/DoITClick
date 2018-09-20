@@ -99,12 +99,19 @@ $(function () {
             dataType: "json"
             
         }).done(function (data) {
-            location.reload();
-            console.log(data);
-            const user = "Chachacharles";
-            const message = new Date().toString() + " Charly";
-            connection.invoke("SendMessage", user, message).catch(err => console.error(err.toString()));
+
+
+            $.niftyNoty({
+                type: "success",
+                container : "floating",
+                title : "Suceso Exitoso",
+                message : "Los datos del Cliente se han guardado correctamente",
+                closeBtn : false,
+                timer : 5000
+            });
+
             this.reset();
+            location.reload();
         }).fail(function (errMsg) {
             console.log(errMsg);
             this.reset();

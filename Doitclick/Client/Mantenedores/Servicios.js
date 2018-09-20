@@ -81,6 +81,17 @@ $(function () {
             dataType: "json",
             success: function (data) { 
                 console.log(data); 
+
+                $.niftyNoty({
+                    type: "success",
+                    container : "floating",
+                    title : "Suceso Exitoso",
+                    message : "Los datos del Servicio se han guardado correctamente",
+                    closeBtn : false,
+                    timer : 5000
+                });
+
+
                 location.reload();
                 
             },
