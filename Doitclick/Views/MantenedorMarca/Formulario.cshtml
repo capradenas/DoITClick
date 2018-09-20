@@ -1,6 +1,6 @@
 
 @{
-    ViewData["Title"] = "Ingreso Unidad Medidas";
+    ViewData["Title"] = "Marcas";
 }
 
 <form id="frm-generico">
@@ -30,18 +30,21 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <h1>@ViewBag.tipoSelected</h1>
                          <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label">Unidad Medida</label>
-                                <input type="text" value="@(ViewBag.Id > 0 ? ViewBag.tipuni.Nombre : "")" name="NombreTipoMedida" class="form-control">
+                                <label class="control-label">Nombre</label>
+                                <input type="text" value="@(ViewBag.Id > 0 ? ViewBag.marcaModel.Nombre : "")" name="Nombre" class="form-control">
                             </div>
                         </div>
+                        
                     </div>
+
+                   
+                    
                 </div>
                 <div class="panel-footer text-right">
                     <input type="hidden" name="Id" value="@ViewBag.Id" />
-                    <a href="/MantenedorTipoMedida/Listado" class="btn btn-primary" >Volver</a>
+                    <a href="/MantenedorMarca/Listado" class="btn btn-primary" >Volver</a>
                     <button class="btn btn-success submit-generico" type="submit">Guardar</button>
                 </div>
             </div>
@@ -50,9 +53,6 @@
 </form>
 
 @section Scripts{
-
-    <script src="~/Assets/plugins/unitegallery/js/unitegallery.min.js"></script>
-    <script src="~/Assets/plugins/unitegallery/themes/tiles/ug-theme-tiles.js"></script>
     
 
     <script type="text/javascript">
@@ -65,32 +65,34 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "/api/mantenedores/tipounidadmedida/guardar",
+                    url: "/api/mantenedores/marcas/guardar",
                     data: JSON.stringify(model),
-                    contentType: "application/json; charset=utf-8"
+                    contentType: "application/json; charset=utf-8" 
                 }).done(function (data) {
                     $.niftyNoty({
                         type: "success",
                         container : "floating",
                         title : "Suceso Exitoso",
-                        message : "Los datos de la Unidad de Medida se han guardado correctamente",
+                        message : "Los datos de la Marca se han guardado correctamente",
                         closeBtn : false,
                         timer : 5000
                     });
                     $('#frm-generico')[0].reset();
-                }).fail(function (errMsg) {
+                }).fail(function (xhr, textStatus) {
                     $.niftyNoty({
                         type: "warning",
                         container : "floating",
-                        title : "Suceso Inesperado",
-                        message : "Los datos NO se han guardado!",
+                        title : "Suceso Erroneo",
+                        message : "Está mal: " + textStatus,
                         closeBtn : false,
                         timer : 5000
                     });
                 }).always(function () {
                     $(".submit-generico").html("Guardar");
                 });
+                
 
+                return false;
             });
 
         });

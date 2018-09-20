@@ -103,7 +103,7 @@
 
                         <div class="text-right no-print">
                             <a href="javascript:window.print()" class="btn btn-default"><i class="demo-pli-printer icon-lg"></i></a>
-                            <button class="btn btn-primary">Guardar</button>
+                            <button class="btn btn-primary submit-generico">Guardar</button>
                         </div>
                     </div>
                 </div>
@@ -145,26 +145,37 @@
                 }
             });
             $('#frm-ingreso-datos-materiales').on("submit", function () {
+                $(".submit-generico").html("Cargando...");
                 const model = $(this).serializeFormJSON();
                 $.ajax({
                     type: "POST",
                     url: "/api/mantenedor/materiales",
                     data: JSON.stringify(model),
                     contentType: "application/json; charset=utf-8",
-                    dataType: "json",
                     success: function (data) { 
-                        console.log(data);
                         $.niftyNoty({
                             type: "success",
                             container : "floating",
                             title : "Suceso Exitoso",
                             message : "Los datos del Material se han guardado correctamente",
+                            closeBtn : true,
+                            timer : 5000,
+                            onHide: function(){
+                                location.reload();
+                            }
+                        });
+                        $(".submit-generico").html("Guardar");
+                    },
+                    failure: function (errMsg) {
+                         $.niftyNoty({
+                            type: "warning",
+                            container : "floating",
+                            title : "Suceso Erroneo",
+                            message : "Los datos del Material NO se han guardado correctamente: " + errMsg,
                             closeBtn : false,
                             timer : 5000
                         });
-                    },
-                    failure: function (errMsg) {
-                        console.log(errMsg);
+                        $(".submit-generico").html("Guardar");
                     }
                 });
 

@@ -111,7 +111,7 @@
                 <div class="panel-footer text-right">
                     <input type="hidden" name="Id" value="@ViewBag.Id" />
                     <a href="/MantenedorMaterialMensual/Listado" class="btn btn-primary" >Volver</a>
-                    <button class="btn btn-success" type="submit">Guardar</button>
+                    <button class="btn btn-success submit-generico" type="submit">Guardar</button>
                 </div>
             </div>
         </div>
@@ -136,23 +136,21 @@
                     type: "POST",
                     url: "/api/mantenedores/materialmensual/guardar",
                     data: JSON.stringify(model),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json"
+                    contentType: "application/json; charset=utf-8"
                 }).done(function (data) {
-                    console.log(data);
-                     $.niftyNoty({
+                    $.niftyNoty({
                         type: "success",
                         container : "floating",
                         title : "Suceso Exitoso",
-                        message : "Los datos del Materal Mensual se han guardado correctamente",
+                        message : "Los datos del Material Mensual se han guardado correctamente",
                         closeBtn : false,
                         timer : 5000
                     });
+                    $('#frm-generico')[0].reset();
                 }).fail(function (errMsg) {
                     console.log(errMsg);
                 }).always(function () {
-                     alert("Datos Guardados");
-                     $('#frm-generico')[0].reset();
+                     
                 });
 
             });
