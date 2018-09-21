@@ -178,7 +178,7 @@ namespace Doitclick.Controllers.Api
                 _context.Servicios.Remove(_context.Servicios.Find(id));
                 _context.SaveChanges();
                 return Ok("Eliminamos cauros: " + id);
-           }catch(Exception ex){
+           }catch(Exception){
                return BadRequest("Error registo con dependencias");
            }
            
@@ -321,7 +321,35 @@ namespace Doitclick.Controllers.Api
             _context.SaveChanges();
             return Ok("Cliente Eliminado");
         }
-        
 
+
+        [Route("marcas/guardar")]
+        public IActionResult GuardarMarca([FromBody] FormGenerico entrada)
+        {
+            Marca laMarca = null;
+            if (entrada.Id > 0)
+            {
+                laMarca = _context.Marcas.Find(entrada.Id);
+                laMarca.Nombre = entrada.Nombre;
+            }
+            else
+            {
+                laMarca = new Marca();
+                laMarca.Nombre = entrada.Nombre;
+                _context.Marcas.Add(laMarca);
+            }
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [Route("marcas/eliminar/{id}")]
+        public IActionResult EliminarMarca([FromRoute] int id)
+        {
+            _context.Marcas.Remove(_context.Marcas.Find(id));
+            _context.SaveChanges();
+            return Ok("Marca Eliminada");
+        }
+        
     }
 }

@@ -53,7 +53,7 @@ namespace Doitclick.Controllers.Api
 
             _context.Servicios.Add(_servicio);
             var respuesta = await _context.SaveChangesAsync();
-            return Ok("{result: 'OK'}");
+            return Ok();
         }
 
        [HttpGet]

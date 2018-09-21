@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Doitclick.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Doitclick.Controllers
 {
@@ -17,7 +18,7 @@ namespace Doitclick.Controllers
         }
         public IActionResult Formulario()
         {
-            ViewBag.MaterialesDisponibles = _context.MaterialesDiponibles.ToList();
+            ViewBag.MaterialesDisponibles = _context.MaterialesDiponibles.Include(f => f.UnidadMedida).ToList();
             return View();
         }
 
