@@ -22,18 +22,18 @@ namespace Doitclick.Controllers
 
         public IActionResult Listado()
         {
-           ViewBag.matmens = _context.MaterialesMensuales.Include(x=>x.UnidadMedida).ToList();
+           ViewBag.matmens = _context.MaterialesMensuales.Include(x=>x.UnidadMedida).Where(x => x.Activa == true).ToList();
             return View();
         }
 
         public IActionResult Formulario(int id = 0)
         {
             ViewBag.Id = id;
-            ViewBag.unidadmed =_context.TiposUnidadMedidas.ToList();
+            ViewBag.unidadmed =_context.TiposUnidadMedidas.Where(x => x.Activa == true).ToList();
 
             var materialmensual = _context.MaterialesMensuales.Include(x=>x.UnidadMedida).Include(x => x.Marca).FirstOrDefault(x => x.Id == id);
             ViewBag.mensual = materialmensual;
-            ViewBag.marcaListado = _context.Marcas.ToList();
+            ViewBag.marcaListado = _context.Marcas.Where(x => x.Activa == true).ToList();
             ViewBag.editando = (id > 0);
             return View();
         }

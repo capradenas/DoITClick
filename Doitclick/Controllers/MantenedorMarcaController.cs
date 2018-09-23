@@ -22,7 +22,7 @@ namespace Doitclick.Controllers
 
         public IActionResult Listado()
         {
-            ViewBag.marcasList = _context.Marcas.ToList();
+            ViewBag.marcasList = _context.Marcas.Where(x => x.Activa == true).ToList();
             return View();
         }
 

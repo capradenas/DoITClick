@@ -21,7 +21,7 @@ namespace Doitclick.Controllers
 
         public IActionResult Listado()
         {
-            ViewBag.unidadlist = _context.TiposUnidadMedidas.ToList();
+            ViewBag.unidadlist = _context.TiposUnidadMedidas.Where(x => x.Activa == true).ToList();
             return View();
         }
 

@@ -15,5 +15,6 @@ namespace Doitclick.Models.Application
         public int Cantidad {get;set;}
         public string Codigo { get; set; }
         public Marca Marca { get; set; }
+        public bool Activa { get; set; }
     }
 }

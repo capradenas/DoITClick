@@ -114,11 +114,28 @@
                     type: "GET",
                     url:`/api/mantenedores/instrumento/eliminar/${id}`
                 }).done(function (data) {
-                    alert("Eliminado exitoso");
+                    $.niftyNoty({
+                        type: "success",
+                        container : "floating",
+                        title : "Suceso Exitoso",
+                        message : "Los datos del Instrumento se han ELIMINADO correctamente",
+                        closeBtn : false,
+                        timer : 3000,
+                        onHide: function(){
+                            location.reload();
+                        }
+                    });
                 }).fail(function (errMsg) {
-                    console.log(errMsg);
+                   $.niftyNoty({
+                        type: "warning",
+                        container : "floating",
+                        title : "Suceso Erroneo",
+                        message : "Los datos del Instrumento NO se han ELIMINADO",
+                        closeBtn : false,
+                        timer : 5000
+                    });
                 }).always(function () {
-                    location.reload();
+                    //location.reload();
                 });
 
             });

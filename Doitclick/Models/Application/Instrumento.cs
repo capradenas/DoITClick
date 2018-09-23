@@ -13,6 +13,7 @@ namespace Doitclick.Models.Application
         public Marca Marca { get; set; }
         public string Descripcion { get; set; }
         public string Estado { get; set; }
+        public bool Activa { get; set; }
         
     }
 }

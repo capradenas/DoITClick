@@ -44,7 +44,7 @@ $(function () {
             
     $('.btn-guardar-material').on('click', function(){
 
-        console.log($('#material').val(), $("#cantidad").val())
+        //console.log($('#material').val(), $("#cantidad").val())
         if ($('#material').val() != "" && $("#cantidad").val() != ""){
             const material = {
                 materialId: $('#material').val(),
@@ -113,6 +113,16 @@ $(function () {
                 
             },
             failure: function (errMsg) {
+
+                $.niftyNoty({
+                    type: "warning",
+                    container : "floating",
+                    title : "Suceso Warning",
+                    message : "Errrorrrrr",
+                    closeBtn : false,
+                    timer : 5000
+                });
+
                 console.log(errMsg);
             }
         });

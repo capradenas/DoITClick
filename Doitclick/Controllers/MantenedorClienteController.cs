@@ -33,7 +33,7 @@ namespace Doitclick.Controllers
 
 
             ViewBag.tiposList = (TipoCliente[])Enum.GetValues(typeof(TipoCliente));
-            ViewBag.PrevisionesSalud = _context.PrevisionesSalud.ToList();
+            ViewBag.PrevisionesSalud = _context.PrevisionesSalud.Where(x => x.Activa == true).ToList();
             return View();
         }
     }

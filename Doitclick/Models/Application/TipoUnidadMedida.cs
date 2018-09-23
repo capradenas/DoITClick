@@ -9,6 +9,7 @@ namespace Doitclick.Models.Application
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
+        public bool Activa { get; set; }
         public IEnumerable<MaterialMensual> MaterialMensual {get;set;}
         public IEnumerable<MaterialDisponible> MAterialDisponible { get; set; }
     }

@@ -9,6 +9,7 @@ using Doitclick.Models.Security;
 using Doitclick.Models.Application;
 using Doitclick.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Doitclick.Controllers.Api
 {
@@ -122,7 +123,8 @@ namespace Doitclick.Controllers.Api
                     Email = entrada.Correo, 
                     Identificador = entrada.Identificacion, 
                     Nombres = entrada.Nombres,
-                    PorcentajeComision = prcc
+                    PorcentajeComision = prcc,
+                    PhoneNumber = entrada.Telefono
                 };
                 var result = await _userManager.CreateAsync(user, "Doitclick.01");
 
@@ -135,14 +137,11 @@ namespace Doitclick.Controllers.Api
                     }else{
                         return BadRequest(rs.Errors);
                     }
-                    
                 }
                 else
                 {
                     return BadRequest(result.Errors);
                 }
-
-                
             }
             else
             {
@@ -175,7 +174,9 @@ namespace Doitclick.Controllers.Api
         public IActionResult EliminarServicio([FromRoute] int id)
         {
            try{
-                _context.Servicios.Remove(_context.Servicios.Find(id));
+                //_context.Servicios.Remove();
+                var svc = _context.Servicios.Find(id);
+                svc.Activa = false;
                 _context.SaveChanges();
                 return Ok("Eliminamos cauros: " + id);
            }catch(Exception){
@@ -195,6 +196,7 @@ namespace Doitclick.Controllers.Api
                 elInstrumento.Marca = _context.Marcas.Find(entrada.Marca);
                 elInstrumento.Estado = entrada.Estado;
                 elInstrumento.Descripcion = entrada.Descripcion;
+                
             }
             else
             {
@@ -204,6 +206,7 @@ namespace Doitclick.Controllers.Api
                 elInstrumento.Marca = _context.Marcas.Find(entrada.Marca);
                 elInstrumento.Estado = entrada.Estado;
                 elInstrumento.Descripcion = entrada.Descripcion;
+                elInstrumento.Activa = true;
 
                 _context.Instrumentos.Add(elInstrumento);
             }
@@ -215,7 +218,9 @@ namespace Doitclick.Controllers.Api
         [Route("instrumento/eliminar/{id}")]
         public IActionResult Eliminarinstrumento([FromRoute] int id)
         {
-            _context.Instrumentos.Remove(_context.Instrumentos.Find(id));
+            //_context.Instrumentos.Remove(_context.Instrumentos.Find(id));
+            var instrumento = _context.Instrumentos.Find(id);
+            instrumento.Activa = false;
             _context.SaveChanges();
             return Ok("Instrumento Eliminado");
         }
@@ -227,11 +232,13 @@ namespace Doitclick.Controllers.Api
             {
                 eltipounidadmedida = _context.TiposUnidadMedidas.Find(entrada.Id);
                 eltipounidadmedida.Nombre = entrada.NombreTipoMedida;
+                
             }
             else
             {
                 eltipounidadmedida = new TipoUnidadMedida();
-                 eltipounidadmedida.Nombre = entrada.NombreTipoMedida;
+                eltipounidadmedida.Nombre = entrada.NombreTipoMedida;
+                eltipounidadmedida.Activa = true;
                 _context.TiposUnidadMedidas.Add(eltipounidadmedida);
             }
             _context.SaveChanges();
@@ -242,7 +249,9 @@ namespace Doitclick.Controllers.Api
         [Route("tipounidadmedida/eliminar/{id}")]
         public IActionResult EliminarTipoMedida([FromRoute] int id)
         {
-            _context.TiposUnidadMedidas.Remove(_context.TiposUnidadMedidas.Find(id));
+            //_context.TiposUnidadMedidas.Remove(_context.TiposUnidadMedidas.Find(id));
+            var unidad = _context.TiposUnidadMedidas.Find(id);
+            unidad.Activa = false;
             _context.SaveChanges();
             return Ok("Unidad Medida Eliminado");
         }
@@ -260,6 +269,7 @@ namespace Doitclick.Controllers.Api
                 elmaterialmensual.StockAlerta=entrada.Stock;
                 elmaterialmensual.Codigo = entrada.Codigo;
                 elmaterialmensual.Marca = _context.Marcas.Find(entrada.Marca);
+                
             }
             else
             {
@@ -270,6 +280,7 @@ namespace Doitclick.Controllers.Api
                 elmaterialmensual.Cantidad=entrada.Cantidad;
                 elmaterialmensual.StockAlerta=entrada.Stock;
                 elmaterialmensual.Codigo = entrada.Codigo;
+                elmaterialmensual.Activa = true;
                 elmaterialmensual.Marca = _context.Marcas.Find(entrada.Marca);
 
                 _context.MaterialesMensuales.Add(elmaterialmensual);
@@ -281,7 +292,9 @@ namespace Doitclick.Controllers.Api
         [Route("materialmensual/eliminar/{id}")]
         public IActionResult EliminarMaterialMensual([FromRoute] int id)
         {
-            _context.MaterialesMensuales.Remove(_context.MaterialesMensuales.Find(id));
+            //_context.MaterialesMensuales.Remove();
+            var material = _context.MaterialesMensuales.Find(id);
+            material.Activa = false;
             _context.SaveChanges();
             return Ok("Material Eliminado");
         }
@@ -331,11 +344,13 @@ namespace Doitclick.Controllers.Api
             {
                 laMarca = _context.Marcas.Find(entrada.Id);
                 laMarca.Nombre = entrada.Nombre;
+                
             }
             else
             {
                 laMarca = new Marca();
                 laMarca.Nombre = entrada.Nombre;
+                laMarca.Activa = true;
                 _context.Marcas.Add(laMarca);
             }
             _context.SaveChanges();
@@ -346,9 +361,15 @@ namespace Doitclick.Controllers.Api
         [Route("marcas/eliminar/{id}")]
         public IActionResult EliminarMarca([FromRoute] int id)
         {
-            _context.Marcas.Remove(_context.Marcas.Find(id));
-            _context.SaveChanges();
-            return Ok("Marca Eliminada");
+            try{
+                //_context.Marcas.Remove();
+                var marca = _context.Marcas.Find(id);
+                marca.Activa = false;
+                _context.SaveChanges();
+                return Ok("Marca Eliminada");
+            }catch(DbUpdateException ex){
+                return BadRequest(ex);
+            }
         }
         
     }

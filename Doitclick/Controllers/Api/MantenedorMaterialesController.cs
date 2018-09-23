@@ -35,7 +35,8 @@ namespace Doitclick.Controllers.Api
                 PrecioUnidad = material.PrecioMaterial,
                 StockAlerta=material.StockMaterial,
                 Codigo = material.Codigo,
-                Marca = await _context.Marcas.FindAsync(material.Marca)
+                Marca = await _context.Marcas.FindAsync(material.Marca),
+                Activa = true
             };
             
             _context.MaterialesDiponibles.Add(_material);

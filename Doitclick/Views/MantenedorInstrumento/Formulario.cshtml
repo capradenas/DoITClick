@@ -50,10 +50,10 @@
                                 <label class="control-label">Estado</label>
                                 <select class="form-control" name="Estado">
                                     <option value="">Seleccione</option>   
-                                    <option value="N" @(ViewBag.editando && ViewBag.instru.Estado == "N" ? "selected" : "")>Nuevo</option>  
-                                    <option value="R" @(ViewBag.editando && ViewBag.instru.Estado == "R" ? "selected" : "")>Regular</option>  
-                                    <option value="M" @(ViewBag.editando && ViewBag.instru.Estado == "M" ? "selected" : "")>Malo</option>  
-                                    <option value="B" @(ViewBag.editando && ViewBag.instru.Estado == "B" ? "selected" : "")>De baja</option>   
+                                    <option value="BN" @(ViewBag.editando && ViewBag.instru.Estado == "N" ? "selected" : "")>Bueno</option>  
+                                    <option value="RG" @(ViewBag.editando && ViewBag.instru.Estado == "R" ? "selected" : "")>Regular</option>  
+                                    <option value="ML" @(ViewBag.editando && ViewBag.instru.Estado == "M" ? "selected" : "")>Malo</option>  
+                                    <option value="BJ" @(ViewBag.editando && ViewBag.instru.Estado == "B" ? "selected" : "")>De baja</option>   
                                 </select>
                             </div>
                         </div>
@@ -114,8 +114,7 @@
                     type: "POST",
                     url: "/api/mantenedores/instrumento/guardar",
                     data: JSON.stringify(model),
-                    contentType: "application/json; charset=utf-8",
-                    //dataType: "json",    
+                    contentType: "application/json; charset=utf-8"
                 }).done(function (data) {
                     $.niftyNoty({
                         type: "success",

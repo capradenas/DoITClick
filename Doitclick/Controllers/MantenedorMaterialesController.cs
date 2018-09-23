@@ -17,8 +17,8 @@ namespace Doitclick.Controllers
         }
         public IActionResult Formulario()
         {
-            ViewBag.marcaListado = _context.Marcas.ToList();
-            ViewBag.unimedListado = _context.TiposUnidadMedidas.ToList();
+            ViewBag.marcaListado = _context.Marcas.Where(x => x.Activa == true).ToList();
+            ViewBag.unimedListado = _context.TiposUnidadMedidas.Where(x => x.Activa == true).ToList();
             return View();  
         }
     }

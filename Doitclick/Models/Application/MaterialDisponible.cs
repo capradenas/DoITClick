@@ -14,6 +14,7 @@ namespace Doitclick.Models.Application
         public int StockAlerta { get; set; }
         public string Codigo { get; set; }
         public Marca Marca { get; set; }
+        public bool Activa { get; set; }
         public ICollection<MovimientoMaterialDisponoble> Movimientos { get; set; }
         public ICollection<MaterialPresupuestado> Presupuestado { get; set; }
     }

@@ -22,7 +22,7 @@ namespace Doitclick.Controllers
 
         public IActionResult Listado()
         {
-            ViewBag.instList = _context.Instrumentos.Include(f => f.Marca).ToList();
+            ViewBag.instList = _context.Instrumentos.Include(f => f.Marca).Where(x => x.Activa == true).ToList();
             return View();
         }
 
@@ -31,7 +31,7 @@ namespace Doitclick.Controllers
             ViewBag.Id = id;
             var Inst = _context.Instrumentos.Include(x => x.Marca).FirstOrDefault(x => x.Id == id);
             ViewBag.instru = Inst;
-            ViewBag.marcaListado = _context.Marcas.ToList();
+            ViewBag.marcaListado = _context.Marcas.Where(x => x.Activa == true).ToList();
             ViewBag.editando = (id > 0);
             return View();
         }

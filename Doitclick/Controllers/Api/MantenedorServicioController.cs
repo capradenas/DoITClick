@@ -34,8 +34,9 @@ namespace Doitclick.Controllers.Api
                 Nombre=servicios.NombreServicio,
                 Resumen=servicios.DescripcionServicio,
                 Codigo=servicios.CodigoServicio,
-                ValorManoObra= servicios.VManoObra,
-                PorcentajeComision=servicios.PorcentajeComision,
+                ValorManoObra= 0,
+                PorcentajeComision=0,
+                Activa = true
                 
            };
 
@@ -59,7 +60,7 @@ namespace Doitclick.Controllers.Api
        [HttpGet]
        public IActionResult ObtenerServiciosAll()
        {
-           return Ok(_context.Servicios.ToList());
+           return Ok(_context.Servicios.Where(x => x.Activa == true).ToList());
        }
       
        

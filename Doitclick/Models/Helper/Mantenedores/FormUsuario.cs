@@ -14,5 +14,6 @@ namespace Doitclick.Models.Helper.Mantenedores
         public string TipoUsuario { get; set; }
         public string PorcentajeComision { get; set; }
         public string Rol {get; set;}
+        public string Telefono { get; set; }
     }
 }
